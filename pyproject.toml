@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ford-decoder"
+version = "3.7.0"
+description = "FORD — Forensic Decoder CLI: rapid triage, multi-layer decoding, and IOC extraction"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+full = ["base58"]
+
+[project.scripts]
+ford = "ford:main"
+
+[tool.setuptools]
+py-modules = ["ford"]

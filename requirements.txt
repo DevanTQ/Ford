@@ -1,0 +1,11 @@
+# FORD Decoder — Dependencies
+# Python 3.8+ required
+# All standard-library imports are included automatically.
+
+# Optional: Base58 decoding support (Bitcoin-style encoding)
+# Uncomment the line below or run: pip install base58
+# base58>=2.1.1
+
+# Optional: Windows ANSI color support (only needed on legacy CMD)
+# Uncomment below or run: pip install colorama
+# colorama>=0.4.6
