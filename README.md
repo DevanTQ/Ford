@@ -1,49 +1,60 @@
-# FORD — Forensic Decoder
+<div align="center">
 
-> **Rapid triage, multi-layer decoding, and IOC extraction — built for CTF and DFIR.**
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&pause=1000&color=00C896&center=true&vCenter=true&width=600&lines=FORD+%E2%80%94+Forensic+Decoder;Multi-Layer+Cryptanalysis+CLI;Built+for+CTF+%26+DFIR" alt="FORD" />
 
-FORD is a zero-dependency CLI that automatically detects and decodes common encodings (Base64, Hex, Binary, ROT, XOR, URL, and more), chains them recursively, and surfaces Indicators of Compromise (flags, IPs, emails, URLs) in a clean terminal output.
+<br/>
+
+![Python](https://img.shields.io/badge/python-3.8+-brightgreen?style=flat-square&logo=python&logoColor=white&labelColor=1a1a2e&color=00c896)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square&labelColor=1a1a2e&color=4f8ef7)
+![Version](https://img.shields.io/badge/version-3.7-red?style=flat-square&labelColor=1a1a2e&color=e85d5d)
+![Platform](https://img.shields.io/badge/platform-linux%20%7C%20windows%20%7C%20macos-informational?style=flat-square&labelColor=1a1a2e&color=8b5cf6)
+![Zero Dependency](https://img.shields.io/badge/zero--dependency-yes-success?style=flat-square&labelColor=1a1a2e&color=00c896)
+
+<br/>
+
+> **Zero-dependency CLI for rapid encoding triage, multi-layer decoding, and IOC extraction.**  
+> Drop a suspicious string in. FORD figures the rest out.
+
+</div>
 
 ---
 
-## Terminal Output
+## Preview
 
-```
-▶ FORD DECODER v3.7 ─── Triage & Multi-Layer Cryptanalysis CLI
-────────────────────────────────────────────────────────────────────────────────
-  Input Payload : aGVsbG8gd29ybGQ=
-  Payload Metrics: 16 chars | Shannon Entropy: 3.75
-────────────────────────────────────────────────────────────────────────────────
+![Preview](assets/preview.png)
 
-  ANALYSIS COMPLETE: 1 matching output pipeline(s) found
-──────────────────────────────────────────────────────────────────────────────
-▶ [BASE64]  Standard Base64 encoding
-  Entropy:  3.56 (>6.5 suggests heavy encryption or random bytes)
-  Result:   hello world
+![Flag Detection](assets/preview2.png)
 
-────────────────────────────────────────────────────────────────────────────────
-  FORD Framework v3.7 | Streamlined Cryptanalysis & Threat Intel Triage
-```
+---
+
+## Features
+
+| | |
+|---|---|
+| 🔍 **Auto-detect** | Base64, Base32, Base64-URL, Base85, Base58, Hex, Binary, ROT13/47, all 25 Caesar shifts, URL encode, HTML entities |
+| 🔗 **Multi-layer chaining** | `--depth` recursively feeds decoded output back through all decoders |
+| 💣 **XOR** | Static single-byte via `--xor`, or bruteforce 0x01–0xFF automatically |
+| 🚩 **IOC extraction** | Auto-highlights CTF flags `WORD{...}`, IPv4, emails, and URLs |
+| 🧬 **Hash identification** | MD5 / SHA-1 / SHA-224 / SHA-256 / SHA-384 / SHA-512 by digest length |
+| 🗂️ **Magic bytes** | Detects PNG, JPEG, ZIP, RAR, ELF, PE, PDF, MP3 in binary output |
+| 📊 **Shannon entropy** | Per-result entropy score to gauge encryption strength |
+| 💾 **File output** | `--output` saves a clean ANSI-stripped report |
+| 🪟 **Windows support** | VT100/ANSI auto-enabled, graceful fallback on legacy CMD |
+| 🔁 **Stdin pipe** | `echo "..." \| ford` |
 
 ---
 
 ## Install
 
-### From Git (recommended — installs the `ford` command globally)
-
 ```bash
-git clone https://github.com/DevanTQ/ford.git
-cd ford
+git clone https://github.com/DevanTQ/Ford.git
+cd Ford
 pip install -e .
 ```
 
-After that, `ford` is available system-wide — no alias needed:
+`ford` is now available system-wide — no alias needed.
 
-```bash
-ford "aGVsbG8gd29ybGQ="
-```
-
-### With Base58 support (optional)
+**With Base58 support (optional):**
 
 ```bash
 pip install -e ".[full]"
@@ -61,53 +72,38 @@ ford "[encoded_text]" --output results.txt
 echo "aGVsbG8=" | ford
 ```
 
-### Options
+### Flags
 
 | Flag | Description |
 |------|-------------|
 | `--depth N` | Recursive decode depth, 1–5 (default: 1) |
-| `--xor 0xKEY` | Apply static single-byte XOR with given key |
-| `--output FILE` | Save results to a plain-text file |
-| `--all` | Force-show weak heuristic results |
+| `--xor 0xKEY` | Single-byte XOR with given key |
+| `--output FILE` | Save plain-text report to file |
+| `--all` | Force-show all weak heuristic results |
 | `--no-banner` | Suppress the header line |
 | `-v / --version` | Print version and exit |
-
----
-
-## Features
-
-- **Auto-detect** — Base64, Base32, Base64-URL, Base85, Base58 (optional), Hex (continuous & spaced), Binary (8-bit spaced & continuous), ROT13, ROT47, all 25 Caesar shifts, URL/percent-encode, HTML entities
-- **XOR** — static single-byte with `--xor` key, or bruteforce 0x01–0xFF when no key is given
-- **Multi-layer chaining** — `--depth` recursively feeds each decoded output back through all decoders
-- **IOC extraction** — auto-highlights CTF flags `WORD{...}`, IPv4 addresses, emails, and URLs
-- **Hash identification** — recognizes MD5 / SHA-1 / SHA-224 / SHA-256 / SHA-384 / SHA-512 by digest length
-- **Magic byte detection** — identifies PNG, JPEG, ZIP, RAR, ELF, PE, PDF, MP3 in decoded binary output
-- **Shannon entropy** — printed per-result to gauge encryption strength
-- **File output** — `--output` saves a clean, ANSI-stripped report
-- **Stdin pipe support** — `echo "..." | ford`
-- **Windows compatible** — VT100/ANSI auto-enabled, graceful fallback on legacy CMD
 
 ---
 
 ## Examples
 
 ```bash
-# Simple Base64
+# Basic Base64
 ford "aGVsbG8gd29ybGQ="
 
-# Nested encoding (Base64 inside Hex)
+# Nested encoding — Base64 wrapped in Hex, 2 layers deep
 ford "6147567362473867643239796247513d" --depth 2
 
-# XOR-encrypted hex with known key
+# XOR with known key
 ford "2a3b1c4d" --xor 0x42
 
-# XOR bruteforce (no key specified)
-ford "08040b0b0e" --xor
+# XOR bruteforce — no key needed
+ford "08040b0b0e"
 
 # Pipe from stdin
 echo "68656c6c6f" | ford
 
-# Save results to file
+# Save report to file
 ford "dGVzdA==" --output report.txt
 
 # Show all results including weak matches
@@ -120,7 +116,22 @@ ford "aGVsbG8=" --all
 
 - Python 3.8+
 - No mandatory third-party packages
-- Optional: `base58` for Base58 decoding, `colorama` for legacy Windows CMD color support
+- Optional: `base58` · `colorama` (legacy Windows CMD)
+
+---
+
+## Project Structure
+
+```
+Ford/
+├── ford.py            ← main tool
+├── pyproject.toml     ← build config & CLI entrypoint
+├── requirements.txt   ← optional dependencies
+├── LICENSE
+├── README.md
+└── tests/
+    └── test_ford.py   ← 35 unit tests
+```
 
 ---
 
@@ -133,21 +144,12 @@ python -m pytest tests/ -v
 
 ---
 
-## Project Structure
-
-```
-ford/
-├── ford.py            # Main tool
-├── pyproject.toml     # Build config + entrypoint (pip install -e .)
-├── requirements.txt   # Optional dependencies
-├── LICENSE            # MIT
-├── README.md
-└── tests/
-    └── test_ford.py   # 35 unit tests
-```
-
----
-
 ## License
 
 MIT — see [LICENSE](LICENSE)
+
+---
+
+<div align="center">
+<sub>Built by <a href="https://github.com/DevanTQ">DevanTQ</a> · for CTF, DFIR, and anyone who stares at encoded strings too long</sub>
+</div>
