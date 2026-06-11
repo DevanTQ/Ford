@@ -1,7 +1,5 @@
 <div align="center">
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&pause=1000&color=00C896&center=true&vCenter=true&width=600&lines=FORD+%E2%80%94+Forensic+Decoder;Multi-Layer+Cryptanalysis+CLI;Built+for+CTF+%26+DFIR" alt="FORD" />
-
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&pause=1000&color=00C896&center=true&vCenter=true&width=600&lines=FORD+%7C+Forensic+Decoder;Multi-Layer+Cryptanalysis+CLI;Built+for+CTF+%26+DFIR" alt="FORD" />
 <br/>
 
 ![Python](https://img.shields.io/badge/python-3.8+-brightgreen?style=flat-square&logo=python&logoColor=white&labelColor=1a1a2e&color=00c896)
@@ -22,7 +20,6 @@
 ## Preview
 
 ![Preview](assets/preview.png)
-
 ![Flag Detection](assets/preview2.png)
 
 ---
@@ -57,7 +54,7 @@ pip install -e .
 **With Base58 support (optional):**
 
 ```bash
-pip install -e ".[full]"
+pip install -e "[full]"
 ```
 
 ---
