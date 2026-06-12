@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ford-decoder"
-version = "3.7.0"
+version = "3.8.0"
 description = "FORD — Forensic Decoder CLI: rapid triage, multi-layer decoding, and IOC extraction"
 readme = "README.md"
 license = { file = "LICENSE" }
